@@ -18,6 +18,33 @@ function reverseAllStrings(arrayOfStrings) {
   }
 }
 
+function reverseAStringInHalfTime(string) {
+  let revArray = [];
+  let len = string.length;
+  let lenHalf = len / 2;
+
+  for (let i = 0; i < lenHalf; i++) {
+    revArray[i] = string[(len - 1) - i];
+    revArray[(len - 1) - i] = string[i];
+  }
+
+  if (0 !== (len % 2)) {
+    revArray[lenHalf + 1] = string[lenHalf + 1];
+  }
+
+  return (revArray.join(""));
+}
+
+function reverseAllStringsInHalfTime(arrayOfStrings) {
+
+  for (let j = 0; j < arrayOfStrings.length; j++) {
+    let res = reverseAStringInHalfTime(arrayOfStrings[j]);
+
+    console.log(res);
+  }
+}
+
+
 var palindromes = [
 "A but tuba.",
 "A car, a man, a maraca.",
@@ -164,3 +191,4 @@ var palindromes = [
 "Ew! Eat a ewe?"
 ];
 reverseAllStrings(palindromes);
+reverseAllStringsInHalfTime(palindromes);
