@@ -20,3 +20,7 @@ The Cure? Take off your own blinders and make a few mistakes. If you care about 
 you are a lost cause. Fear is the mind killer, unleash your brain and stick fear in the toilet. Today's coders are Mad Scientists,
 so let's set your coding game on fire, and have a public debate about your skills. Matter of fact lets rap about it while were lighting 
 your last NDA on fire.
+
+  https://github.com/leachim6/hello-world
+  
+  https://github.com/zenware/FizzBuzz
