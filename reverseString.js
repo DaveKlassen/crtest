@@ -1,46 +1,90 @@
-function reverseAString(string) {
-  let revArray = [];
-  let len = string.length;
+#!/usr/bin/env node
 
-  for (let i = 0; i < len; i++) {
- 	  revArray[i] = string[(len - 1) - i];
+/*
+ * This is the fastest implementation
+ */
+function reverseString(string) {
+  let len = string.length - 1;
+  let revStr = "";
+
+  for (let i = len; i >= 0; i--) {
+    revStr += string[i];
   }
 
-  return (revArray.join(""));
+  return (revStr);
 }
 
 function reverseAllStrings(arrayOfStrings) {
 
-  for (let j = 0; j < arrayOfStrings.length; j++) {
-    let res = reverseAString(arrayOfStrings[j]);
+  for (let z = 0; z < 500000; z++) {
+    for (let j = 0; j < arrayOfStrings.length; j++) {
+      let res = reverseString(arrayOfStrings[j]);
 
-    console.log(res);
+      //console.log(res);
+    }
   }
 }
 
-function reverseAStringInHalfTime(string) {
+/*
+ * This is the second fastest implementation, since less loop increments happen.
+ * We thought having less loop/increments would save quite a few CPU cycles.
+ * As it turns out our strings were not so long anyway.
+ */
+function reverseStringToArrayWithLessOps(string) {
   let revArray = [];
   let len = string.length;
-  let lenHalf = len / 2;
+  let lenHalf = parseInt(len / 2);
 
   for (let i = 0; i < lenHalf; i++) {
     revArray[i] = string[(len - 1) - i];
     revArray[(len - 1) - i] = string[i];
   }
 
+  // If lenHalf is not parseInt'd this is not necessary 
+  // (ie. stays float and two middle Ops happen)
   if (0 !== (len % 2)) {
-    revArray[lenHalf + 1] = string[lenHalf + 1];
+    revArray[lenHalf] = string[lenHalf];
+  }
+  //console.log( (len % 2) + " " + lenHalf);
+
+  return (revArray.join(""));
+}
+
+function reverseAllStringsToArrayWithLessOps(arrayOfStrings) {
+
+  for (let z = 0; z < 500000; z++) {
+    for (let j = 0; j < arrayOfStrings.length; j++) {
+      let res = reverseStringToArrayWithLessOps(arrayOfStrings[j]);
+
+      //console.log(res);
+    }
+  }
+}
+
+
+/*
+ * This is the slowest implementation, since resorting to an array
+ * requires the join call to create a single string afterwards.
+ */
+function reverseStringToArray(string) {
+  let revArray = [];
+  let len = string.length;
+
+  for (let i = 0; i < len; i++) {
+    revArray[i] = string[(len - 1) - i];
   }
 
   return (revArray.join(""));
 }
 
-function reverseAllStringsInHalfTime(arrayOfStrings) {
+function reverseAllStringsToArray(arrayOfStrings) {
 
-  for (let j = 0; j < arrayOfStrings.length; j++) {
-    let res = reverseAStringInHalfTime(arrayOfStrings[j]);
+  for (let z = 0; z < 500000; z++) {
+    for (let j = 0; j < arrayOfStrings.length; j++) {
+      let res = reverseStringToArray(arrayOfStrings[j]);
 
-    console.log(res);
+      //console.log(res);
+    }
   }
 }
 
@@ -190,5 +234,15 @@ var palindromes = [
 "evitative",
 "Ew! Eat a ewe?"
 ];
-reverseAllStrings(palindromes);
-reverseAllStringsInHalfTime(palindromes);
+
+console.log(reverseString("Haymesh") );
+
+
+//reverseAllStrings(palindromes);
+//reverseAllStringsToArrayWithLessOps(palindromes);
+//reverseAllStringsToArray(palindromes);
+
+//setTimeout(function () { reverseAllStrings(palindromes); }, 1000);
+//setTimeout(function () { reverseAllStringsToArrayWithLessOps(palindromes); }, 1000);
+//setTimeout(function () { reverseAllStringsToArray(palindromes); }, 1000);
+
