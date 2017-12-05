@@ -1,0 +1,39 @@
+You might want to install the Windows Subsystem for Linux because you heard it worked well...
+I did that and found that terminal processing was horrible in remote ssh sessions, and wished for the days of cygwin...
+However I also ran into problems installing Cygwin on Windows 10.
+Here is what I did to make it work:
+
+Start the Cygwin setup and Download all the cygwin packages you want...
+Install Strawberry Perl... and place it's Perl/bin first in path,
+Next in path is cygwin...
+
+Install cygwin from the downloads already completed.
+Make sure to over-write /bin/perl.exe to point to the stawberry perl version.
+    This must be done during the install
+    But after perl is installed by the installer...
+    And before the post-install scripts get run.
+If you don't follow these steps the Cygwin install will loop for infinitum.
+I used strace to figure out what was going on (But not enough solve the Perl issues).
+
+The install should execute fine, provided the above occured.
+Now its all installed...
+
+How to get shell: 
+	copy the cygwin.bat file to a new file and remove the --login flag
+
+Use this new .bat file to start a Cygwin bash shell.
+
+Update bash completion (Since it is now broken):
+	vi /etc/bash_completion.d/zzz-fzf
+add these lines:
+
+$ diff /etc/bash_completion.d/zzz-fzf zzz-fzf
+279,283d278
+<
+<   # https://github.com/junegunn/fzf/issues/668
+<   cmd="${cmd//+/_}"
+<   cmd="${cmd//-/_}"
+<
+
+Modify ALL your configs.. hahaha
+reload
